@@ -13,7 +13,7 @@
     <title>Task Mananger</title>
 </head>
 
-<body>
+<body onLoad="loadInitialData()">
     <div class="add__new__btn__mobile__only d-md-none">
         <button class="btn btn-success " data-bs-toggle="modal" data-bs-target="#addNewModal" type="button">
             <i class="fas fa-plus d-flex gap-2" style="font-family:Georgia, 'Times New Roman', Times, serif">Add
@@ -21,6 +21,7 @@
             <!-- <i class="fa-solid fa-plus-large">Add New</i> -->
         </button>
     </div>
+
     <div class="modal fade" id="addNewModal" tabindex="-1" aria-labelledby="addNewModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -29,11 +30,61 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <form onsubmit="return false">
+                        <div class="mb-3">
+                            <label for="imageUrl" class="form-label">
+                                Image URL
+                            </label>
+                            <input type="url" class="form-control" id="imageUrl"
+                                placeholder="http://example.com/image.png" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="taskTitle" class="form-label">
+                                Task Title
+                            </label>
+                            <input type="text" class="form-control" id="taskTitle" placeholder="Lets do it!" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="tags" class="form-label">
+                                Task Type
+                            </label>
+                            <input type="type" class="form-control" id="tags" placeholder="What you would like to do :)"
+                                required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="taskDescription" class="form-label">
+                                Task Description
+                            </label>
+                            <textarea class="form-control" id="taskDescription" placeholder="Lets have a brief.."
+                                rows="4" required></textarea>
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" type="button" class="btn btn-outline-success"
+                            onclick="handleSubmit()">Save
+                            changes</button>
+                    </form>
+                </div>
+                <!-- <div class="modal-footer">
+                    
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+    </button> -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="showTask" tabindex="-1" aria-labelledby="showTaskLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body task__modal__body">
                     ...
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline-success">Save changes</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                 </div>
             </div>
         </div>
@@ -70,6 +121,7 @@
             </div>
         </div>
     </nav>
+
     <div class="container">
         <section class="mt-4">
             <div class="row justify-content-center">
@@ -78,7 +130,7 @@
                     <!-- if you add lg-8 means when in a large screen it will occupy 8 space -->
                     <div class="input-group flex-nowrap shadow-lg rounded">
                         <input type="search" class="form-control" placeholder="Search Task ..." aria-label="Search Task"
-                            aria-describedby="addon-wrapping" />
+                            aria-describedby="addon-wrapping" oninput="searchTask.apply(this, arguments)" />
                         <span class="input-group-text" id="addon-wrapper">
                             <i class="fas fa-search"></i>
                         </span>
@@ -87,9 +139,10 @@
             </div>
         </section>
     </div>
+
     <section class="mt-4">
-        <div class="row task_contents">
-            <h1>This place will show my tasks</h1>
+        <div class="row task__contents">
+            <!-- <h1>This place will show my tasks</h1> -->
         </div>
     </section>
 
